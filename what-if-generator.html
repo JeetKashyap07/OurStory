@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>What If... 💭</title>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Quicksand', sans-serif;
+      background: linear-gradient(to right, #fff0f5, #ffe4f0);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
+      color: #b03060;
+      text-align: center;
+      min-height: 100vh;
+    }
+
+    h1 {
+      font-family: 'Dancing Script', cursive;
+      font-size: 3rem;
+      margin-bottom: 20px;
+    }
+
+    #what-if-box {
+      background: #fff5f8;
+      border: 2px dashed #ff9cb1;
+      border-radius: 20px;
+      padding: 30px;
+      max-width: 500px;
+      font-size: 1.4rem;
+      box-shadow: 0 4px 15px rgba(255, 105, 180, 0.2);
+      min-height: 100px;
+    }
+
+    .btn {
+      margin-top: 25px;
+      padding: 12px 24px;
+      font-size: 1.1rem;
+      border-radius: 25px;
+      background-color: #ffccd5;
+      color: #b03060;
+      font-weight: bold;
+      border: none;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+
+    .btn:hover {
+      background-color: #ffb6c1;
+    }
+
+    .back {
+      margin-top: 40px;
+      text-decoration: none;
+      color: #b03060;
+      font-weight: bold;
+      background-color: #ffe6ec;
+      padding: 10px 20px;
+      border-radius: 20px;
+      box-shadow: 0 3px 10px rgba(255, 105, 180, 0.2);
+    }
+
+    .emoji-row {
+      margin-top: 20px;
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+      font-size: 1.8rem;
+      cursor: pointer;
+    }
+
+    .emoji-row span:hover {
+      transform: scale(1.3);
+    }
+
+    #reaction-display {
+      margin-top: 15px;
+      font-size: 1.2rem;
+      color: #d63384;
+    }
+  </style>
+</head>
+<body>
+  <h1>💭 What If...</h1>
+  <div id="what-if-box">Tap the button below to dream a little with me 💌</div>
+  <h3>Choose your mood:</h3>
+<div style="margin-bottom: 20px;">
+  <button class="btn" onclick="setMode('soft')">💗 Soft</button>
+  <button class="btn" onclick="setMode('spicy')">🔥 Spicy</button>
+  <button class="btn" onclick="setMode('bdsm')">🖤 BDSM</button>
+</div>
+<button class="btn" onclick="generateWhatIf()">✨ Show Me</button>
+
+
+  <div class="emoji-row">
+    <span onclick="react('😍')">😍</span>
+    <span onclick="react('🥺')">🥺</span>
+    <span onclick="react('😂')">😂</span>
+    <span onclick="react('😳')">😳</span>
+    <span onclick="react('💀')">💀</span>
+  </div>
+
+  <div id="reaction-display"></div>
+
+  <a href="index.html" class="back">🏠 Back to Home</a>
+
+  <script>
+    let mode = 'soft'; // default
+
+const softWhatIfs = [
+  "What if we built a secret room only we knew about? 💭",
+  "What if every kiss added a year to our life together? 💋",
+  "What if I made you breakfast in bed every Sunday? 🥞",
+  "What if I proposed to you at your fav place with your fav song playing? 💍",
+  "What if we woke up to ocean waves every day? 🌊",
+  "What if I wrote a book about our love? 📖",
+  "What if we had a dog that wore matching hoodies with us? 🐶",
+  "What if we had a fort made of pillows and fairy lights? ✨",
+  "What if we danced in the kitchen every time the food got ready? 🎶",
+  "What if I tattooed your name in my heartbeat line? ❤️",
+  "What if I kissed you every time you blushed? 😚",
+  "What if we spent a year just traveling the world together? ✈️",
+  "What if we did a photo shoot of us just laughing and kissing? 📸",
+  "What if I carried you to bed every night? 🛏️",
+  "What if you got to name all our future babies? 👶",
+  "What if we made our own coffee brand together? ☕",
+  "What if we had our names engraved on the stars? 🌟",
+  "What if I held your hand in every lifetime? 🫶",
+  "What if you got to control my kisses for a day? 😏",
+  "What if I could freeze time when you smile? ⏳",
+  "What if our first kiss happened under fireworks? 🎆",
+  "What if I kissed your forehead every time you said “I’m fine”? 😔",
+  "What if I whispered all my poems into your skin? 📝",
+  "What if we lived in a cabin with snow outside and hot cocoa inside? ❄️",
+  "What if we had a room filled with only Polaroids of us? 📷",
+  "What if we created a playlist for every mood we’ve been through? 🎧",
+  "What if I kissed you before every decision I made? 💭",
+  "What if you were the only password I ever used? 🔐",
+  "What if your laughter could heal me? 🤍",
+  "What if your eyes were the only mirror I ever saw myself in? 👁️",
+  "What if I built you a vanity that said “You’re perfect” every time it lit up? 💡",
+  "What if I got jealous every time someone made you smile? 🥺",
+  "What if we turned every argument into a dance battle? 💃",
+  "What if I wrote your name on every sunset I saw? 🌅",
+  "What if we slow danced in the rain like a movie scene? 🌧️",
+  "What if I licked off ice cream from your lips? 🍦",
+  "What if you woke up to me whispering “You’re mine” every morning? 🔐",
+  "What if we binged every series, cuddled, no phones allowed? 📺",
+  "What if your hoodie was the only thing I ever wore? 😳",
+  "What if I whispered a new name for you every night? 💞",
+  "What if our love became a museum of memories? 🖼️",
+  "What if we fell asleep every night, fingers tangled? 🤝",
+  "What if I hugged you so tight you forgot you ever felt alone? 🤗",
+  "What if every outfit you wore came with a compliment from me? 😍",
+  "What if we made love letters out of receipts and napkins? ✍️",
+  "What if I took you on a candlelit date... in our bedroom? 🕯️",
+  "What if you moaned my name without even touching me? 🔥",
+  "What if we played “truth or kiss” forever? 😘",
+  "What if I kissed you mid-fight just to mess with your brain? 💋",
+  "What if I wrote a poem every night based on your mood? 📜",
+  "What if your voice was the only music I ever heard? 🎵",
+  "What if I kissed your scars and called them art? 🎨",
+  "What if we built a playlist of kisses for every emotion? 🎶",
+  "What if I kissed your hand every time you reached for mine? 🤝",
+  "What if you were my last first kiss? 💏",
+  "What if our kitchen became our date spot every Friday? 🍽️",
+  "What if our love had no language, just touch? 🫂",
+  "What if I caught every tear before it could fall? 😢",
+  "What if we celebrated every month like a holiday? 🎉",
+  "What if I turned all your fears into lullabies? 💤",
+  "What if I asked you to marry me... 3 times a year? 💍",
+  "What if our love had its own theme song? 🎼",
+  "What if I designed a perfume that smelled like your hugs? 🌸",
+  "What if our favorite spot became our forever place? 🏡",
+  "What if we kissed under the stars after every fight? 🌌",
+  "What if we wrote letters and buried them for our kids to find? ✉️",
+  "What if your smile could light every candle I ever burn? 🕯️",
+  "What if you had a dress that glowed when you thought of me? ✨",
+  "What if we spent Sundays under the blanket, just talking? 🛌",
+  "What if I got nervous every time you walked toward me — forever? 🥹",
+  "What if I gave you my hoodie, and you never gave it back? 🧥",
+  "What if I confessed something new I love about you every day? ❤️",
+  "What if our pillow talks became a podcast? 🎙️",
+  "What if you were the only reason I learned to cook? 🍜",
+  "What if I cried the first time I saw you in a wedding dress? 👰",
+  "What if we created a scrapbook of only our weirdest moments? 📓",
+  "What if our story was secretly being written in the stars? 🌠",
+  "What if we kissed in every city we travel to? 🌍",
+  "What if I watched you sleep just because you looked so soft? 😴",
+  "What if I kept your love notes under my pillow? 💌",
+  "What if I made you your fav meal after every argument? 🍱",
+  "What if we matched tattoos secretly and showed each other later? 🖋️",
+  "What if you woke up one day and all you saw was me smiling? 🌞",
+  "What if your love cured my bad days? 🩹",
+  "What if you wore my shirt on purpose — every day? 👕",
+  "What if we wrote poetry with our eyes? 👁️",
+  "What if we were old, grey, wrinkly, and still flirting like teens? 👵👴",
+  "What if I loved you more with every second I spent away from you? ⏰",
+  "What if we made a rule — 1 forehead kiss per hour? 😚",
+  "What if our memories played like home movies when we cuddled? 🎬",
+  "What if every time you blinked, I kissed you? 😳",
+  "What if I told you this entire list was based on how much I love you? 💖"
+];
+
+const spicyWhatIfs = [
+  "What if I kissed your neck slowly... while you begged for more? 🔥",
+  "What if I whispered every naughty thought I had about you, right into your ear? 😈",
+  "What if your moans were the only music I ever wanted to hear? 🎶",
+  "What if I traced your body like it was the only map I needed? 🗺️",
+  "What if I tied your hands... and took my time? 🖤",
+  "What if every inch of your skin had a memory of my lips? 💋",
+  "What if I undressed you... without touching your clothes? 😏",
+  "What if I kissed down your chest, then paused... just to hear your breath hitch? 🫁",
+  "What if I said, 'Tonight, I own your pleasure'? 👀",
+  "What if I made you count every kiss I gave you — out loud? 🔥",
+  "What if I blindfolded you, and made you guess what part I’m kissing? 🖤",
+  "What if your hips told me secrets my lips were dying to know? 👄",
+  "What if my hands slid under your shirt... and stayed there a while? 👕",
+  "What if we never made it out of bed... all weekend? 🛏️",
+  "What if your thighs were my new favorite place to rest my face? 😮‍💨",
+  "What if I kissed you so deep you forgot your own name? 😵‍💫",
+  "What if I whispered 'mine' after every kiss... just to remind you? 🔐",
+  "What if I made you come with nothing but my words? 🗣️💦",
+  "What if we didn’t need foreplay... because we were always on fire? 🔥",
+  "What if I left you breathless... over and over again? 💭",
+  "What if I licked off every drop of chocolate you wore? 🍫",
+  "What if I kissed your inner thighs... slower than your patience allows? 😩",
+  "What if I pinned you down... just to hear you beg? 🖤",
+  "What if we made a list of fantasies... and crossed one off every week? 📝",
+  "What if I whispered 'good girl' right as your back arched? 😳",
+  "What if I traced your lips with mine until you couldn’t take it anymore? 💋",
+  "What if we broke the bedframe one night... and laughed while doing it? 🛏️",
+  "What if your softest moan became my favorite addiction? 🔥",
+  "What if I kissed behind your knees... just to see what it does to you? 👀",
+  "What if you told me exactly where to touch... and I still didn’t? 😈",
+  "What if I kissed your spine like a poem line-by-line? 📜",
+  "What if we created a secret language... made only of gasps and moans? 😮",
+  "What if I touched you until you forgot the world existed? 🌌",
+  "What if my lips explored every place you’ve ever hidden softness? 💖",
+  "What if we made love with no words — only eyes and skin? 🫦",
+  "What if I pulled your hair just right... while kissing your shoulder? 👅",
+  "What if I made you beg to be kissed — then kissed you everywhere but your lips? 😤",
+  "What if your breath hitched... and I smiled because I caused it? 🫁",
+  "What if your name left my mouth like a prayer during sin? 😇😈",
+  "What if I let you take control... just so I could take it back? 🔁",
+  "What if I kissed you against the wall... while the world kept moving? 🌍",
+  "What if I made you read this list to me... while blushing? 📱",
+  "What if I kissed your wrist, your neck, then your lips... all without breaking eye contact? 👁️",
+  "What if we made a rule: no clothes after 10pm? 😏",
+  "What if I wrote a poem on your body... and made you feel every line? ✍️",
+  "What if we kissed so hard we forgot the lights were still on? 💡",
+  "What if we played a game of control — and you lost on purpose? 🎮",
+  "What if I made love to you like it was the last night on Earth? 🌘",
+  "What if we never needed a safe word... because you always trusted me? 🔒",
+  "What if every whisper turned into a fantasy we acted out? 🛏️"
+];
+
+
+const bdsmWhatIfs = [
+  "What if I chained your wrists above your head... and made you beg with your eyes? ⛓️",
+  "What if I told you to strip, kneel, and not speak until I allowed it? 🔇",
+  "What if I made you count every spank... and lose count on purpose just to start over? 🥵",
+  "What if your body trembled from a blindfold and the sound of my belt? 🖤",
+  "What if I whispered 'stay still' while dragging ice along your spine? ❄️",
+  "What if I bent you over, whispered 'mine' — and proved it over and over again? 🔥",
+  "What if you wore nothing but a collar and your obedience? 🐾",
+  "What if I tied your legs wide open... and punished you for moaning too loud? 😈",
+  "What if I told you to touch yourself... but not finish without permission? ⏳",
+  "What if I gagged you with my fingers just to feel you struggle under control? 🖐️",
+  "What if I pulled your hair, held your throat... and kissed you like a sin? 🔥",
+  "What if I made you crawl to me — and rewarded you only when you begged right? 🐾",
+  "What if your safe word was the only thing stopping me from breaking you into bliss? 🔐",
+  "What if I spanked you so hard, the next kiss made you flinch? 🖤",
+  "What if I kept you edge-aching and soaked, whispering how pretty you look ruined? 💦",
+  "What if I commanded you to look into my eyes... while I owned every inch of you? 👁️",
+  "What if I slid the toy deeper... and told you to thank me after every pulse? 🔋",
+  "What if you weren’t allowed to speak — only moan, whimper, and obey? 🤫",
+  "What if I made you scream into the sheets... then kissed your tears like praise? 😭",
+  "What if I whispered rules into your ear... and punished every mistake deliciously? 📜",
+  "What if I wrapped your leash around my hand... and pulled you into my hunger? 🖤",
+  "What if I made you orgasm... just to deny you seconds later? 😩",
+  "What if I left you dripping, aching, gasping — just so you’d beg for more? 💥",
+  "What if your punishment was being tied up... while I kissed everywhere except where you need? 😤",
+  "What if I reminded you — with every bruise and bite — that you belong to me? 🩶",
+  "What if I bent you over the edge of the bed... and broke your mind one thrust at a time? 😈", 
+  "What if I tied your wrists so tight you could feel my ownership with every heartbeat? ⛓️",
+  "What if I made you beg until your voice cracked — and still told you no? 🖤",
+  "What if I kept you gagged while I dragged my belt down your spine? 🥵",
+  "What if I made you scream into the mattress while calling you my filthy little thing? 🛏️",
+  "What if I slapped your inner thighs until they trembled from pain and want? 👋",
+  "What if I spit in your mouth, smiled, and told you to thank me for it? 😶‍🌫️",
+  "What if I fucked your brain first, then your body — until both were ruined for anyone else? 🔥",
+  "What if I marked you with bite after bite until you wore me like bruised lace? 🩶",
+  "What if I forced your knees apart... just to edge you until you cried? 💦",
+  "What if I choked you with my hand while whispering ‘You exist to please me’? 🖐️",
+  "What if I punished you for flinching... then punished you harder when you didn’t? 🖤",
+  "What if I made you scream 'Sir' every time my hips hit yours? 😮‍💨",
+  "What if I shoved my fingers in your mouth and asked 'Is that all you can take?' 😏",
+  "What if I stripped you down, tied you up, and left you begging for hours? 🪢",
+  "What if I smacked your ass until it was red enough to write my name on? 🍑",
+  "What if I wrapped a leash around your throat and tugged every time you disobeyed? 🐾",
+  "What if I blindfolded you, turned you around, and fucked you until you forgot your name? 🔒",
+  "What if I made you drip while you kneeled in silence — just to test your obedience? 😤",
+  "What if I kept you locked up until you begged like a feral thing in heat? 🔐",
+  "What if I edged you for hours... then came without letting you? 💢",
+  "What if I kept your legs spread with rope and hit your thighs until you whimpered ‘please’? 🪢",
+  "What if I whispered your limits back to you... while pushing them further? 📏",
+  "What if I forced eye contact while I ruined your sweet little hole? 👁️",
+  "What if I kissed you softly... right before I slapped you hard? 👋💋",
+  "What if I covered your mouth... just to hear how loud your body begs instead? 🤫",
+  "What if I made you say you’re mine with a cock in your throat? 🖤",
+  "What if I used you like my personal toy — until you forgot what softness felt like? 🧸",
+  "What if I pulled your hair back while spitting out filth into your ear? 💦",
+  "What if I kept a tally of how many times you broke... and restarted every time? 📊",
+  "What if I dragged you into the shower... fully clothed... and fucked you soaked? 🚿",
+  "What if I grabbed your chin mid-cry... and called you my beautiful little whore? 😭",
+  "What if I slapped your face just hard enough to remind you who owns it? 👋",
+  "What if I flipped you like a ragdoll and took what’s already mine? 🛏️",
+  "What if I punished you for trying to act strong — until you cried like my pet? 🐶",
+  "What if I gagged you with my belt and took my time fucking you speechless? 🖤",
+  "What if I made you write ‘I belong to you’ a hundred times — with my cum on your thighs? ✍️",
+  "What if I ripped your panties and laughed while you begged for mercy? 👙",
+  "What if I made you crawl to me across the floor, dripping and trembling? 🐾",
+  "What if I said ‘no safe word tonight’... and you nodded with tears in your eyes? 🔥",
+  "What if I recorded your moans... just to play them back while I used you again? 📱",
+  "What if I used toys so deep... you forgot where your body ended and mine began? 🎮",
+  "What if I shoved you against the mirror so you could watch yourself get destroyed? 🪞",
+  "What if I came inside... and told you not to let it drip while I watched? 🥵",
+  "What if I held you down so tightly... your skin bruised in my fingerprint patterns? 🤚",
+  "What if I bent you over the table during dinner — just because I could? 🍽️",
+  "What if I whispered ‘you’re perfect like this — broken for me’... and kissed your tears? 🖤",
+  "What if I made you wear a plug all day... then pulled it out with a smile? 👀",
+  "What if I said ‘you don’t cum until I say’... and made you obey with your whole body? 😩",
+  "What if I fucked the brat out of you... and kissed the submissive back in? 😈"
+];
+
+
+
+    function setMode(selected) {
+  mode = selected;
+  document.getElementById("what-if-box").innerText = `You selected ${mode.toUpperCase()} mode 💭 Now tap Show Me!`;
+  document.getElementById("reaction-display").innerText = "";
+}
+
+function generateWhatIf() {
+  let pool;
+  if (mode === 'soft') pool = softWhatIfs;
+  else if (mode === 'spicy') pool = spicyWhatIfs;
+  else if (mode === 'bdsm') pool = bdsmWhatIfs;
+  else pool = softWhatIfs;
+
+  const random = Math.floor(Math.random() * pool.length);
+  document.getElementById("what-if-box").innerText = pool[random];
+  document.getElementById("reaction-display").innerText = "";
+}
+
+  </script>
+</body>
+</html>
