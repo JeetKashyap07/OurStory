@@ -1,17 +1,116 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Our Love Story</title>
   <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&family=Dancing+Script&display=swap" rel="stylesheet">
+  <style>
+    body {
+  font-family: 'Dancing Script', cursive;
+  background: linear-gradient(to right, #fff0f5, #ffe6f0);
+  color: #702c57;
+  font-size: 20px;
+  line-height: 1.8;
+}
+
+h1, h2 {
+  font-size: 2.4rem;
+}
+
+p {
+  font-size: 1.2rem;
+  color: #702c57;
+}
+
+    .countdown-section {
+      background: #fff0f5;
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(176, 48, 96, 0.15);
+      margin: 40px auto;
+      padding: 30px 20px;
+      max-width: 600px;
+      text-align: center;
+    }
+
+    .countdown-title {
+      font-size: 2rem;
+      margin-bottom: 20px;
+    }
+
+    .countdown {
+      display: flex;
+      justify-content: space-around;
+      font-size: 1.4rem;
+    }
+
+    .countdown div span {
+      display: block;
+      font-size: 2.2rem;
+      font-weight: bold;
+    }
+  </style>
+
+  <script src="https://cdn.jsdelivr.net/gh/motyar/pure-particles@1.0.0/pure-particles.min.js"></script>
+<style>
+  #flower-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+  }
+</style>
+
 </head>
 <body>
+
   <!-- Header Section -->
   <header>
     <h1>Our Love Story</h1>
-    <p><b>Five months down and forever to go!!!</b></p>
+    <p><b>Six months down and forever to go!!!</b></p>
   </header>
+
+  <div class="flower-wrapper">
+  <div class="flower flower1">🌸</div>
+  <div class="flower flower2">💮</div>
+  <div class="flower flower3">🌺</div>
+  <div class="flower flower4">🌼</div>
+  <div class="flower flower5">🌷</div>
+  <div class="flower flower6">🌻</div>
+  <div class="flower flower7">🌸</div>
+  <div class="flower flower8">🌺</div>
+  <div class="flower flower9">💐</div>
+  <div class="flower flower10">🌼</div>
+  <div class="flower flower11">🌸</div>
+  <div class="flower flower12">🌺</div>
+</div>
+
+
+   <!-- Dating Since Timer -->
+<section class="countdown-section">
+  <h2 class="countdown-title">Dating Since 💘 22nd Nov 2024</h2>
+  <div class="countdown" id="datingSince">
+    <div><span id="dating-days"></span>Days</div>
+    <div><span id="dating-hours"></span>Hours</div>
+    <div><span id="dating-minutes"></span>Minutes</div>
+    <div><span id="dating-seconds"></span>Seconds</div>
+  </div>
+</section>
+
+  <!-- Love Since Timer -->
+  <section class="countdown-section">
+    <h2 class="countdown-title">Been Loving You Since 💞 8th Dec 2023</h2>
+    <div class="countdown" id="countSince">
+      <div><span id="since-days"></span>Days</div>
+      <div><span id="since-hours"></span>Hours</div>
+      <div><span id="since-minutes"></span>Minutes</div>
+      <div><span id="since-seconds"></span>Seconds</div>
+    </div>
+  </section>
 
   <!-- Message Section: Love Letter -->
   <section id="love-letter">
@@ -36,6 +135,18 @@
       <b>Jeet</b>
     </p>
   </section>
+
+  <section id="build-game">
+  <h2>✨ Try This! ✨</h2>
+  <a href="write-me-a-poem.html" class="love-btn"> Write Me a Poem</a>
+</section>
+
+
+<section id="whatif-game" style="text-align: center; margin: 40px 0;">
+  <h2 style="font-family: 'Dancing Script', cursive; font-size: 2rem; color: #b03060;">✨ Dream a Little With Me ✨</h2>
+  <a href="what-if-generator.html" class="love-btn">💭 What If... Generator</a>
+</section>
+
 
   <!-- Promise Section -->
   <section id="promise">
@@ -76,6 +187,9 @@
 
   <!-- Our Journey Section -->
   <a class="love-btn" href="poems.html">Poetry of Us 📝</a>
+
+  
+
 
 
   <!-- Future Together Section -->
@@ -181,12 +295,64 @@
       <a href="tired.html" class="love-btn">You're tired</a>
       <a href="unlovable.html" class="love-btn">You feel unlovable</a>
       <a href="turnedon.html" class="love-btn">You're turned on</a>
+      <a href="apology.html" class="love-btn">Apology (if not replied within 48 hours)</a>
     </div>
   </section>
   
   
   
-  <script src="script.js"></script>
+   <script>
+    // Dating Since (Nov 22, 2023)
+  const datingStart = new Date("Nov 22, 2024 00:00:00").getTime();
+  setInterval(() => {
+    const now = new Date().getTime();
+    const dist = now - datingStart;
+    const d = Math.floor(dist / (1000 * 60 * 60 * 24));
+    const h = Math.floor((dist % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const m = Math.floor((dist % (1000 * 60 * 60)) / (1000 * 60));
+    const s = Math.floor((dist % (1000 * 60)) / 1000);
+    document.getElementById("dating-days").innerText = d;
+    document.getElementById("dating-hours").innerText = h;
+    document.getElementById("dating-minutes").innerText = m;
+    document.getElementById("dating-seconds").innerText = s;
+  }, 1000);
+    // Timer Since 8th December 2023
+    const loveStart = new Date("Dec 8, 2023 00:00:00").getTime();
+    setInterval(() => {
+      const now = new Date().getTime();
+      const dist = now - loveStart;
+      const d = Math.floor(dist / (1000 * 60 * 60 * 24));
+      const h = Math.floor((dist % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const m = Math.floor((dist % (1000 * 60 * 60)) / (1000 * 60));
+      const s = Math.floor((dist % (1000 * 60)) / 1000);
+      document.getElementById("since-days").innerText = d;
+      document.getElementById("since-hours").innerText = h;
+      document.getElementById("since-minutes").innerText = m;
+      document.getElementById("since-seconds").innerText = s;
+    }, 1000);
+  </script>
+
+
+  <canvas id="flower-canvas"></canvas>
+<script>
+  PureParticles.init({
+    el: '#flower-canvas',
+    numParticles: 30,
+    particle: {
+      size: 40,
+      image: {
+        src: 'https://cdn-icons-png.flaticon.com/512/415/415733.png',
+        width: 64,
+        height: 64
+      }
+    },
+    motion: {
+      speed: 0.6,
+      direction: 'bottom',
+      random: true
+    }
+  });
+</script>
 
 </body>
 </html>
