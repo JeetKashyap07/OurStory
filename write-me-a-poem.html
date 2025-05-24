@@ -105,6 +105,8 @@
   <br />
   <button class="btn" onclick="submitPoem()">💌 Submit Poem</button>
   <button class="btn" onclick="clearPoems()">🗑️ Clear All</button>
+  <button class="btn" onclick="sendToWhatsApp()">💬 Send to WhatsApp</button>
+
   <br>
   <a href="index.html" class="btn">🏠 Back to Home</a>
 
@@ -139,6 +141,17 @@
       localStorage.removeItem("poems");
       document.getElementById("output").innerHTML = "";
     }
+
+    function sendToWhatsApp() {
+  const poem = document.getElementById("poem").value.trim();
+  if (!poem) {
+    alert("Write your poem first, silly! 😘");
+    return;
+  }
+  const msg = encodeURIComponent("Here's my poem for you 💌:\n\n" + poem);
+  const phone = "917995855611"; // ← Replace this with YOUR full WhatsApp number
+  window.open(`https://wa.me/${phone}?text=${msg}`, "_blank");
+}
 
     window.onload = () => {
       const stored = localStorage.getItem("poems");
